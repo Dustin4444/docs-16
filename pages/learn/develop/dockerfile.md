@@ -10,7 +10,7 @@ Balena uses [Docker](https://www.docker.com/) containers to manage deployment an
 To ensure a service has everything it needs, you'll want to create a list of instructions for building a [container image](https://docs.docker.com/engine/understanding-docker/#/inside-docker). Whether the build process is done [on your device](local-mode.md), [on your workstation](../../external-docs/balena-cli/latest.md#build), or on the [balena builders](../deploy/deployment.md), the end result is a read-only image that ends up on your device. This image is used by the container engine (balena or Docker, depending on the balenaOS version) to kick off a running container.
 
 {% hint style="info" %}
-For additional information on working with Dockerfiles with balena see the [services masterclass](../../external-docs/masterclasses/services-masterclass.md).
+For additional information on working with Dockerfiles with balena see the [services masterclass](https://github.com/balena-io/docs/blob/main/pages/external-docs/masterclasses/services-masterclass.md).
 {% endhint %}
 
 ## Dockerfiles
@@ -32,7 +32,7 @@ For details on other instructions, consult the official [Dockerfile documentatio
 ### Using Dockerfiles with balena
 
 {% hint style="danger" %}
-Containers ran as single container **have no security restrictions**, this should only be used for prototyping and testing. For production applications, we recommend defining your own `docker-compose.yml` file with the appropriate security settings for your use case. For more information on this, see our [multicontainer documentation](./multicontainer.md).
+Containers ran as single container **have no security restrictions**, this should only be used for prototyping and testing. For production applications, we recommend defining your own `docker-compose.yml` file with the appropriate security settings for your use case. For more information on this, see our [multicontainer documentation](multicontainer.md).
 {% endhint %}
 
 To deploy a single-container release to balena, simply place a `Dockerfile` at the root of your repository. A `docker-compose.yml` file will be automatically generated, ensuring your container has host networking, is privileged, and has `lib/modules`, `/lib/firmware`, and `/run/dbus` bind mounted into the container. The default `docker-compose.yml` will look something like this:
@@ -181,4 +181,4 @@ With a plain Node.js project, our build server will detect compatible nodejs ver
 
 ## Container Requirements
 
-The balena Supervisor requires that the directory `/tmp/balena` in containers be available for inter-container communication via [update locks](../../external-docs/update-locking.md). Therefore, scripts should not attempt to remove this directory on startup.
+The balena Supervisor requires that the directory `/tmp/balena` in containers be available for inter-container communication via [update locks](https://github.com/balena-io/docs/blob/main/pages/external-docs/update-locking.md). Therefore, scripts should not attempt to remove this directory on startup.

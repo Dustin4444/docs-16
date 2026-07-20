@@ -63,7 +63,7 @@ Cloudlink status in the dashboard represents a device connection to the balenaCl
 * [Public Device Url](../manage/actions.md#public-device-url)
 * [Device actions](../manage/actions.md#device-actions) that allow controlling device state
 * [Host OS Updates](../../reference/os/updates/self-service.md)
-* [Device Diagnostics](../../external-docs/diagnostics.md)
+* [Device Diagnostics](https://github.com/balena-io/docs/blob/main/pages/external-docs/diagnostics.md)
 
 Currently, Cloudlink uses [OpenVPN](https://openvpn.net/) as an underlying technology to achieve its functionality. Devices only connect outbound to Cloudlink, and all traffic over Cloudlink is encrypted with TLS.
 
@@ -103,7 +103,7 @@ BalenaOS provides Software Bill of Materials (SBOM) in the - machine readable, b
 
 As we apply patches to fix vulnerabilities, comparing the version of a component to popular vulnerability databases such as the NVD is not enough. That's why we also release `vex` files along with the SBOM. Each vex file is related to a specific SBOM and **will list known vulnerabilities (CVE) that don't impact the release**, with an explanation when possible (i.e. the vulnerable code path is not accessible, the vulnerability has been patched, ...). Beware that this is **not an exhaustive list of known vulnerabilities** for the component. The vex file should only be used to filter down the list of vulnerabilities reported by SBOM vulnerability scanner.
 
-A device release might contain multiple assets (the OS itself, a flasher image, the initramfs, ...), each will have their own `bom.json` and `vex.json`. 
+A device release might contain multiple assets (the OS itself, a flasher image, the initramfs, ...), each will have their own `bom.json` and `vex.json`.
 
 `bom.json` and `vex.json` files can be found in the asset list of an OS release page (under the `cyclonedx` folder); click the `HOST OS VERSION` of a device to go to that page).
 

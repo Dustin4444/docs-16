@@ -4,9 +4,9 @@ A fleet's release provides a collection of services to run as containers on each
 
 <figure><img src="../../.gitbook/assets/app-services (1).png" alt=""><figcaption></figcaption></figure>
 
-Additionally, the Device Supervisor may also run containers.  These are included in a separate _Supervisor_ section. As system level services, they do not provide control operations. This new section is only available for Supervisor v18.2.0 and above.&#x20;
+Additionally, the Device Supervisor may also run containers. These are included in a separate _Supervisor_ section. As system level services, they do not provide control operations. This new section is only available for Supervisor v18.2.0 and above.
 
-<figure><img src="../../.gitbook/assets/supervisor-services (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/supervisor-services.webp" alt=""><figcaption></figcaption></figure>
 
 Both tables display the name, status, and active release of each service. The clickable icons on the right allow control over the service container. The logs button at the right end of each row allows to control the visibility of the service in the logs section.
 

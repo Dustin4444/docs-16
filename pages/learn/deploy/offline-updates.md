@@ -114,7 +114,7 @@ OR
 $ uuid=<UUID OF YOUR DEVICE>
 ```
 
-With [`balena device register`](../../external-docs/balena-cli/latest.md#device-register), devices can be preregistered to a balenaCloud fleet involving a simple call with a unique identifier for the device. You can read more about the full process of pre-registering a device in the [balena-cli advanced masterclass](../../external-docs/masterclasses/advanced-cli.md#id-5.2-preregistering-a-device). This step can be skipped if a pre-existing device is needed to be updated.
+With [`balena device register`](../../external-docs/balena-cli/latest.md#device-register), devices can be preregistered to a balenaCloud fleet involving a simple call with a unique identifier for the device. You can read more about the full process of pre-registering a device in the [balena-cli advanced masterclass](https://github.com/balena-io/docs/blob/main/pages/external-docs/masterclasses/advanced-cli.md#id-5.2-preregistering-a-device). This step can be skipped if a pre-existing device is needed to be updated.
 
 ```bash
 $ balena device register ${fleet_slug} --uuid ${uuid}
@@ -162,7 +162,7 @@ $ rm ${config}
 
 ### Create and Preload Release
 
-Offline updates revolve around the concept of [balena preload](../../external-docs/balena-cli/latest.md#preload). Preload is used to flash the balenaOS image and your fleet release in a single step, so the device starts running your release's containers as soon as it boots. Preloading removes the need for your devices to download the initial images directly from balena's build servers, making it an ideal base for the offline update process. Read more about [preloading a device image](../../external-docs/masterclasses/advanced-cli.md#id-5.1-preloading-a-device-image).
+Offline updates revolve around the concept of [balena preload](../../external-docs/balena-cli/latest.md#preload). Preload is used to flash the balenaOS image and your fleet release in a single step, so the device starts running your release's containers as soon as it boots. Preloading removes the need for your devices to download the initial images directly from balena's build servers, making it an ideal base for the offline update process. Read more about [preloading a device image](https://github.com/balena-io/docs/blob/main/pages/external-docs/masterclasses/advanced-cli.md#id-5.1-preloading-a-device-image).
 
 {% hint style="info" %}
 [balena preload](../../external-docs/balena-cli/latest.md#preload) functionality is not available with a secure boot OS image. Read more about [why application preloading is not supported in this case](../../reference/os/secure-boot-and-full-disk-encryption/overview.md#application-preloading-not-supported).
