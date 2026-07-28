@@ -261,7 +261,7 @@ For multicontainer releases, setting the service `network_mode` to `host` in `do
 Balena `docker-compose.yml` files support the creation of multiple bridge networks allowing you to compartmentalize further, so that some services exist in only one defined network, whereas others may be able to communicate in many. The `aliases` [keyword](https://docs.docker.com/compose/compose-file/compose-file-v2/#aliases) for providing alias names for services (including FQDNs) and [IPAM bridge networks](https://docs.docker.com/compose/compose-file/compose-file-v2/#network-configuration-reference) are also supported.
 
 {% hint style="warning" %}
-For more information on networking with balena, see the [balena services masterclass](https://github.com/balena-io/docs/blob/main/pages/external-docs/masterclasses/services-masterclass.md#id-4.-networking-types).
+For more information on networking with balena, see the [balena services masterclass](../more/masterclasses/services-masterclass.md#id-4.-networking-types).
 {% endhint %}
 
 ### Public device URLS

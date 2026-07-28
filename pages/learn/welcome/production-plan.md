@@ -110,7 +110,7 @@ Happily, you can [preload](../../external-docs/balena-cli/latest.md#preload) you
 
 For situations where you need to register your devices before they have been powered on or connected to the network, you can [preregister](../../external-docs/balena-cli/latest.md#device-register) them. Preregistering a device allows the creation of individually registered devices in a fleet, which is extremely useful in situations such as manufacturing where a device may require tracking, as a specific device UUID can then be associated with a specific customer order.
 
-More information about preloading images and preregistering devices can be found in the [CLI Advanced Masterclass](https://github.com/balena-io/docs/blob/main/pages/external-docs/masterclasses/advanced-cli.md) or the [CLI documentation](../../external-docs/balena-cli/latest.md).
+More information about preloading images and preregistering devices can be found in the [CLI Advanced Masterclass](../more/masterclasses/advanced-cli.md) or the [CLI documentation](../../external-docs/balena-cli/latest.md).
 
 ### Canary deployments
 
