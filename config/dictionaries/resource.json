@@ -349,20 +349,20 @@
     ],
     "examples": [
       {
-        "id": "get-devices",
-        "summary": "Get all devices",
-        "description": "",
-        "method": "GET",
-        "endpoint": "/v7/device",
-        "filters": ""
-      },
-      {
         "id": "devices-by-fleet",
         "summary": "Get all devices by fleet",
         "description": "",
         "method": "GET",
         "endpoint": "/v7/device",
         "filters": "?\\$filter=belongs_to__application%20eq%20'<FLEET ID>'"
+      },
+      {
+        "id": "devices-by-org",
+        "summary": "Get all devices by organization",
+        "description": "",
+        "method": "GET",
+        "endpoint": "/v7/device",
+        "filters": "?\\$filter=belongs_to__application/any(a:a/organization%20eq%20'<ORG ID>')"
       },
       {
         "id": "device-by-id",
