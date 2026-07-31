@@ -59,18 +59,18 @@
 ---
 ## Examples 
 
-### Get all devices
-
-```bash
-GET "https://api.balena-cloud.com/v7/device" \
--H "Content-Type: application/json" \
--H "Authorization: Bearer <AUTH_TOKEN>" 
-```
-
 ### Get all devices by fleet
 
 ```bash
 GET "https://api.balena-cloud.com/v7/device?\$filter=belongs_to__application%20eq%20'<FLEET ID>'" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <AUTH_TOKEN>" 
+```
+
+### Get all devices by organization
+
+```bash
+GET "https://api.balena-cloud.com/v7/device?\$filter=belongs_to__application/any(a:a/organization%20eq%20'<ORG ID>')" \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer <AUTH_TOKEN>" 
 ```
