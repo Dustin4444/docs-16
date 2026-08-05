@@ -11,9 +11,11 @@ Because of the additional operational management required for ARM Secure Boot, i
 * **Raspberry Pi CM4 (IO Board)** - Secure Boot and disk encryption for the CM4 uses Raspberry Pi Ltd's [built-in OTP (One-Time Programmable) hardware mechanisms](https://pip.raspberrypi.com/categories/1260-security/documents/RP-003466-WP/Boot-Security-Howto.pdf) rather than relying on an add-on TPM module.
 * **Compulab IOT-GATE-iMX8 & iMX8 PLUS -** Instead of a traditional Trusted Platform Module (TPM), this implementation leverages standard NXP High Assurance Boot (HAB) mechanisms and an on-board hardware security element.<br>
 
-Because the device is tied to individual customer keys, these will not be public device types, but rather private device types visible only to each specific customer. Since ARM Secure Boot on balena is still under active development, it is only available as a private trial. To register your interest in this feature once it is in general release or to inquire about a pre-release trial, fill out the form below:
+Because the device is tied to individual customer keys, these will not be public device types, but rather private device types visible only to each specific customer. Since ARM Secure Boot on balena is still under active development, it is only available as a private trial.&#x20;
 
-{% embed url="https://e2b56.share.hsforms.com/2oo597r8ZTbexG49qyGTZ8Q" %}
+{% hint style="info" %}
+To register your interest in ARM Secure Boot and Full Disk Encryption once it is in general release or to inquire about a pre-release trial, fill out [this form](https://e2b56.share.hsforms.com/2oo597r8ZTbexG49qyGTZ8Q).
+{% endhint %}
 
 Below are the details of the requirements and implementation steps for each of the secure boot device types.
 
