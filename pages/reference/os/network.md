@@ -462,38 +462,69 @@ This specific dispatcher script ensures that when a wired interface is connected
 
 In order for a balena device to get outside of the local network and connect to the balena API, there are a few core network requirements.
 
-Balena makes use of the following ports:
+### Ports
 
-* `443` TCP - This is the most fundamental requirement - it is used to connect to Cloudlink and the web terminal, and many web endpoints using TLS (https://.)
-* `123` UDP - For NTP time synchronization.
-* `53` UDP - For DNS name resolution.
+| Port  | Protocol | Notes                                                                                                                                                                         |
+| ----- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `443` | TCP      | This is the most fundamental requirement. Used to connect to API, registry, cloudlink and other endpoints                                                                     |
+| `123` | UDP      | <p>Used for <a href="https://docs.balena.io/reference/os/time#networking-requirements">NTP time synchronization</a>.<br>May be blocked if a local NTP server is provided.</p> |
+| `53`  | UDP      | <p>Used for <a href="network.md#dns">DNS name resolution</a>.<br>May be blocked if a local DNS server is provided</p>                                                         |
 
-Each of these should work with outward only (and inward once outward connection established) firewall settings. Additionally, the NTP (`123`) and DNS (`53`) ports may be blocked if a local NTP and DNS server are provided.
+Each of these should work with outbound only (and inbound once outbound connection is established) firewall settings. No inbound rules or port forwarding are needed.
 
-Additionally, you should allowlist the following domains for the relevant ports above:
+### Domains
+
+You should allowlist the following domains for the relevant ports listed in [Ports](network.md#ports):&#x20;
 
 * `*.balena-cloud.com`
 
-For older devices using `*.resin.io`, a `301 Moved Permanently` redirection to `*.balena-cloud.com` is in place so they remain compatible. Your systems should be able to handle this redirect so they can connect to the API.
+We recommend a wildcard rule because it keeps working when balena adds or changes an endpoint.
 
-Example:
+#### Networks that cannot use a wildcard
 
-```
-$ curl -I http://api.resin.io
-HTTP/1.1 301 Moved Permanently
-Date: Wed, 25 Mar 2020 17:55:22 GMT
-Content-Type: text/plain; charset=utf-8
-Content-Length: 63
-Connection: keep-alive
-Location: https://api.balena-cloud.com/
-Vary: Accept
+Some networks cannot use a wildcard rule, either because the firewall does not support one or because policy requires every destination to be listed explicitly. For these cases, we have an API endpoint that returns the current set of hostnames a device requires for operation:
+
+```console
+$ curl https://api.balena-cloud.com/os/v1/network-endpoints
 ```
 
-[Google's Public DNS](https://developers.google.com/speed/public-dns) server at 8.8.8.8 is used by default and in addition to DNS servers obtained via DHCP from your local network or service provider (balenaOS may issue queries to multiple DNS servers simultaneously, for the quickest response to be used). If additional DNS servers are configured via DHCP or other means, it is OK for the local network to block requests to `8.8.8.8`. To avoid any requests being made to `8.8.8.8` by balenaOS, modify the [dnsServers setting](https://github.com/balena-os/meta-balena#dnsservers) in `config.json`.
+You should query the endpoint when you configure your firewall rather than working from a pre-existing list, and **query it again periodically** to update your firewall rules. Hostnames do not change often, but they are subject to change - please keep this in mind when configuring firewalls.<br>
 
 {% hint style="warning" %}
 Deploying devices in heavily restricted networks, such as behind country-level firewalls, may affect the ability of the device to connect to cloudlink and is not guaranteed to work.
 {% endhint %}
+
+### Cloudlink and hostname-based firewall rules
+
+{% hint style="info" %}
+This applies whether you use a wildcard rule or an explicit list of hostnames.
+{% endhint %}
+
+Some firewalls filter traffic by hostname rather than by IP address. For HTTPS traffic, this is usually done using [Server Name Indication](https://en.wikipedia.org/wiki/Server_Name_Indication) (SNI), a TLS extension where the client states the hostname it wants to reach as part of the handshake, before the connection is encrypted. The firewall reads that hostname and applies its rules to it.
+
+This only works for traffic that uses TLS. Cloudlink connects over port `443`, but the traffic is OpenVPN and not TLS/HTTPS, so the connection carries no hostname for the firewall to read.&#x20;
+
+To allow cloudlink on a firewall that matches on hostname, resolve the cloudlink hostname and allow the resulting addresses on port `443`:
+
+```
+$ dig +short cloudlink.balena-cloud.com
+<load-balancer-hostname>
+<one or more IP addresses>
+```
+
+The hostname resolves to a load balancer, which is why the addresses behind it are not\
+fixed.
+
+{% hint style="warning" %}
+Allowlisting IP addresses is brittle. These are load balancer addresses, and they can\
+change without notice, which will silently break connectivity for your devices. If you\
+have to do this, re-resolve the hostname regularly and update your rules rather than\
+treating the addresses as fixed.
+{% endhint %}
+
+### DNS
+
+[Google's Public DNS](https://developers.google.com/speed/public-dns) server at `8.8.8.8` is used by default and in addition to DNS servers obtained via DHCP from your local network or service provider (balenaOS may issue queries to multiple DNS servers simultaneously, for the quickest response to be used). If additional DNS servers are configured via DHCP or other means, it is OK for the local network to block requests to `8.8.8.8`. To avoid any requests being made to `8.8.8.8` by balenaOS, modify the [dnsServers setting](https://github.com/balena-os/meta-balena#dnsservers) in `config.json`.
 
 ## Connecting Behind a Proxy
 
